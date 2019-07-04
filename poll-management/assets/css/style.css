@@ -1,0 +1,17 @@
+.avail-options span
+{
+	display: block
+
+}
+.question
+{
+	font-weight:  bold
+}
+.btn-vote
+{
+	padding: 7px !important
+}
+.avail-options label
+{
+	cursor: pointer
+}

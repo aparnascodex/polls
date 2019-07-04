@@ -12,6 +12,14 @@
 define('POLL_DIR', dirname(__FILE__));
 
 if (is_file(POLL_DIR.'/poll_post.php')) require_once(POLL_DIR.'/poll_post.php');
+if (is_file(POLL_DIR.'/poll_response.php')) require_once(POLL_DIR.'/poll_response.php');
+if (is_file(POLL_DIR.'/poll_widget.php')) require_once(POLL_DIR.'/poll_widget.php');
+
+
+function poll_widget() {
+    register_widget( 'poll_widget' );
+}
+add_action( 'widgets_init', 'poll_widget' );
 
 /*
 * Hook : register_activation_hook
@@ -53,7 +61,16 @@ function create_required_tables()
     }
     
 }
-
-
-
-
+//Get user Ip address for capturing unique respose for each user. all users won't be having WordPress accounts
+function get_user_ip_address()
+{
+	if(!empty($_SERVER['HTTP_CLIENT_IP'])) 
+      	 $ip=$_SERVER['HTTP_CLIENT_IP'];
+        
+    elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    else
+        $ip=$_SERVER['REMOTE_ADDR'];
+    
+	return $ip;
+}

@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){
 	jQuery('.poll-date').datepicker({
-		 minDate: +1,
+		 minDate: +0,
 		 dateFormat: 'yy-mm-dd'
 	});
 
@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
 			success:function(msg) {
 				console.log(msg);
 				if(msg == 1) {
-					alert('There already one Poll scheduled on the same date. Please try different date.');
+					alert('There is already one poll scheduled on the same date. Please try different date.');
 					jQuery('.poll-date').val('');
 				}
 				

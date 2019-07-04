@@ -12,6 +12,9 @@ class Poll {
 		add_action('add_meta_boxes', array($this,'polls_answer_metabox'));
 		add_action('save_post', array($this,'save_options_and_date'), 10, 2);
 		add_action('wp_ajax_check_date_availibility', array($this, 'check_date_availibility'));
+		add_filter( 'manage_cst_poll_posts_columns',  array($this, 'set_schedule_date_columns'));
+		add_action( 'manage_cst_poll_posts_custom_column' , array($this, 'display_schedule_date_columns'), 10, 2 );
+
 	}
 
 	//Define custom post type
@@ -166,6 +169,22 @@ class Poll {
 					<input type='text' class='poll-date' name='poll_date' value='$date'>
 				</div>
 			</div>";
+	}
+	public function set_schedule_date_columns($columns) {
+ 
+    	$columns['poll_date'] = __( 'Scheduled Date', 'poll' );
+       	return $columns;
+	}
+	
+	public function display_schedule_date_columns( $column, $post_id ) {
+    	switch ( $column ) {
+
+        case 'poll_date' :
+            $date = get_post_meta( $post_id , 'poll_date' ,true);
+           	echo $date;
+            break;
+
+        }
 	}
 
 }
