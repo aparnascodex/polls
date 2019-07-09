@@ -10,6 +10,8 @@ class Poll_Response {
 	public function __construct() {
 		
 		add_action('wp_ajax_insert_response', array($this, 'insert_response'));
+		add_action('wp_ajax_nopriv_insert_response', array($this, 'insert_response'));
+
 	}
 
 	public function insert_response()
